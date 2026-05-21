@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Transformation & AI Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00f5ff, #7a5cff);
+      border-radius: 20px;
+    }
+
+    .background-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -2;
+    }
+
+    .glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      opacity: 0.35;
+      animation: moveGlow 15s infinite alternate ease-in-out;
+    }
+
+    .glow.one {
+      background: #00f5ff;
+      top: -200px;
+      left: -200px;
+    }
+
+    .glow.two {
+      background: #7a5cff;
+      bottom: -250px;
+      right: -250px;
+      animation-delay: 4s;
+    }
+
+    @keyframes moveGlow {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      to {
+        transform: translateY(80px) translateX(60px);
+      }
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+    }
+
+    .hero {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-left h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ffffff, #00f5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-left p {
+      color: #d2d7ff;
+      line-height: 1.9;
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+    }
+
+    .tagline {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04);
+      border-radius: 40px;
+      margin-bottom: 25px;
+      color: #00f5ff;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.4s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(90deg, #00f5ff, #7a5cff);
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,245,255,0.35);
+    }
+
+    .btn.secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+    }
+
+    .dashboard {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      perspective: 1000px;
+    }
+
+    .floating-card {
+      position: absolute;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      padding: 25px;
+      overflow: hidden;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .hero-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #00f5ff, #7a5cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: iconPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes iconPulse {
+      0%,100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.12);
+      }
+    }
+
+    .rotating-ring {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border: 2px dashed rgba(0,245,255,0.25);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: rotateRing 18s linear infinite;
+    }
+
+    @keyframes rotateRing {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .tech-orb {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #00f5ff;
+      box-shadow: 0 0 20px #00f5ff;
+      animation: orbit 8s linear infinite;
+    }
+
+    .tech-orb.two {
+      animation-delay: 2s;
+      background: #7a5cff;
+      box-shadow: 0 0 20px #7a5cff;
+    }
+
+    .tech-orb.three {
+      animation-delay: 4s;
+    }
+
+    @keyframes orbit {
+      from {
+        transform: rotate(0deg) translateX(160px) rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg) translateX(160px) rotate(-360deg);
+      }
+    }
+
+    .project-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: #00f5ff;
+      z-index: 5;
+      animation: floatIcon 4s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+      0%,100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .network-lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .network-lines span {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00f5ff, transparent);
+      animation: moveLine 4s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes moveLine {
+      from {
+        transform: translateX(-120%);
+      }
+      to {
+        transform: translateX(120%);
+      }
+    }
+
+    .mini-icon-row {
+      display: flex;
+      gap: 15px;
+      margin-top: 18px;
+      font-size: 1.3rem;
+      color: #00f5ff;
+    }
+
+    .mini-icon-row i {
+      animation: bounceIcon 3s infinite ease-in-out;
+    }
+
+    .mini-icon-row i:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .mini-icon-row i:nth-child(3) {
+      animation-delay: 0.8s;
+    }
+
+    .mini-icon-row i:nth-child(4) {
+      animation-delay: 1.2s;
+    }
+
+    @keyframes bounceIcon {
+      0%,100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .floating-card {
+      position: absolute;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      padding: 25px;
+      overflow: hidden;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .floating-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(0,245,255,0.5), transparent);
+      top: -40px;
+      right: -40px;
+    }
+
+    .card-1 {
+      width: 320px;
+      height: 180px;
+      top: 0;
+      left: 40px;
+    }
+
+    .card-2 {
+      width: 280px;
+      height: 220px;
+      top: 220px;
+      left: 0;
+      animation-delay: 1s;
+    }
+
+    .card-3 {
+      width: 260px;
+      height: 160px;
+      top: 120px;
+      right: 20px;
+      animation-delay: 2s;
+    }
+
+    .card-4 {
+      width: 340px;
+      height: 180px;
+      bottom: 20px;
+      right: 0;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0%,100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .card-title {
+      font-size: 1rem;
+      color: #00f5ff;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #00f5ff, #7a5cff);
+      animation: loading 3s infinite ease-in-out;
+    }
+
+    @keyframes loading {
+      0% {
+        width: 20%;
+      }
+      50% {
+        width: 90%;
+      }
+      100% {
+        width: 40%;
+      }
+    }
+
+    section {
+      padding: 100px 8%;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #bcc5ff;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+    }
+
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: 0.4s ease;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0,245,255,0.18);
+    }
+
+    .project-header {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0d122e, #1b2757);
+    }
+
+    .ai-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,255,0.12) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: moveGrid 8s linear infinite;
+    }
+
+    @keyframes moveGrid {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(30px);
+      }
+    }
+
+    .pulse-circle {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,245,255,0.5);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 3s infinite;
+    }
+
+    .pulse-circle:nth-child(2) {
+      width: 180px;
+      height: 180px;
+      animation-delay: 1s;
+    }
+
+    .pulse-circle:nth-child(3) {
+      width: 240px;
+      height: 240px;
+      animation-delay: 2s;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.4);
+      }
+    }
+
+    .project-content {
+      padding: 30px;
+    }
+
+    .project-content h3 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .project-content p {
+      color: #c7d0ff;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 8px 14px;
+      border-radius: 30px;
+      background: rgba(0,245,255,0.1);
+      border: 1px solid rgba(0,245,255,0.2);
+      color: #00f5ff;
+      font-size: 0.85rem;
+    }
+
+    .timeline {
+      max-width: 1100px;
+      margin: auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(#00f5ff, #7a5cff);
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 30px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+      transition: 0.4s ease;
+    }
+
+    .timeline-box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(0,245,255,0.15);
+    }
+
+    .timeline-box h4 {
+      margin-bottom: 10px;
+      color: #00f5ff;
+      font-size: 1.2rem;
+    }
+
+    .timeline-box p {
+      color: #d2d7ff;
+      line-height: 1.7;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      top: 45px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #00f5ff;
+      border: 4px solid #050816;
+      z-index: 10;
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -9px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -9px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 40px 20px;
+      text-align: center;
+      transition: 0.4s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-10px);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00f5ff, #7a5cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      padding: 80px 20px;
+      text-align: center;
+      color: #9ca7dd;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    @media(max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left h1 {
+        font-size: 3rem;
+      }
+
+      .dashboard {
+        height: 500px;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even),
+      .timeline-item:nth-child(odd) {
+        width: 100%;
+        left: 0;
+        padding-left: 60px;
+        text-align: left;
+      }
+
+      .timeline-item::before,
+      .timeline-item:nth-child(odd)::before,
+      .timeline-item:nth-child(even)::before {
+        left: 11px;
+      }
+    }
+
+    @media(max-width: 700px) {
+      .hero-left h1 {
+        font-size: 2.4rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+
+      .floating-card {
+        transform: scale(0.85);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROFESSIONAL JOB PROFILE HEADER -->
+  <div style="position:relative; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:22px 50px; background:rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px);">
+
+    <!-- LEFT: PROFILE INFO -->
+    <div style="max-width:70%;">
+      <div style="font-size:2rem; font-weight:700; letter-spacing:2px; background:linear-gradient(90deg,#00f5ff,#7a5cff); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+        Manoj Bhuskade
+      </div>
+
+      <div style="margin-top:6px; font-size:1.05rem; color:#cbd6ff; letter-spacing:1px;">
+        Digital Transformation & AI | GIS & Data Engineering Specialist
+      </div>
+
+      <div style="margin-top:10px; color:#aeb8ff; font-size:0.95rem; line-height:1.6;">
+        Enterprise AI systems • GIS analytics platforms • Automated ETL pipelines •
+        Infrastructure intelligence solutions for national-scale operations
+      </div>
+    </div>
+
+    <!-- RIGHT: ORG + KPI STYLE -->
+    <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+      <div style="padding:10px 18px; border-radius:30px; background:rgba(0,245,255,0.08); border:1px solid rgba(0,245,255,0.25); color:#00f5ff; font-weight:600; letter-spacing:1px;">
+        Ashghal PWA
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <div style="padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); text-align:center;">
+          <div style="font-size:0.9rem; color:#00f5ff; font-weight:600;">AI</div>
+          <div style="font-size:0.7rem; color:#cfd6ff;">Systems</div>
+        </div>
+
+        <div style="padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); text-align:center;">
+          <div style="font-size:0.9rem; color:#7a5cff; font-weight:600;">GIS</div>
+          <div style="font-size:0.7rem; color:#cfd6ff;">Analytics</div>
+        </div>
+
+        <div style="padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); text-align:center;">
+          <div style="font-size:0.9rem; color:#00f5ff; font-weight:600;">₹</div>
+          <div style="font-size:0.7rem; color:#cfd6ff;">500K Save</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    <div style="padding:10px 18px; border-radius:30px; background:rgba(0,245,255,0.08); border:1px solid rgba(0,245,255,0.25); color:#00f5ff; font-weight:600; letter-spacing:1px;">
+      Ashghal PWA
+    </div>
+  </div>
+    <div style="font-size:1.1rem; color:#cbd6ff; margin-top:6px; letter-spacing:1px;">
+      Ashghal PWA
+    </div>
+  </div>
+
+  <div class="background-grid"></div>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <header>
+    <div class="hero">
+      <div class="hero-left reveal">
+        <div class="tagline">DIGITAL TRANSFORMATION • AI • GIS • ANALYTICS</div>
+        <div class="hero-icon">
+          <i class="fa-solid fa-microchip"></i>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div style="font-size:1.1rem; color:#00f5ff; letter-spacing:2px; margin-bottom:8px; font-weight:600;">
+            Manoj Bhuskade
+          </div>
+          <div style="font-size:1rem; color:#b9c3ff; letter-spacing:1px;">
+            Ashghal PWA
+          </div>
+        </div>
+        <h1>Engineering Intelligent Infrastructure Solutions</h1>
+        <p>
+          Enterprise-grade AI platforms, GIS analytics systems, automated ETL pipelines,
+          intelligent pavement inspection tools, predictive infrastructure analytics, and
+          scalable digital transformation solutions built for national-scale operations.
+        </p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn primary">Explore Projects</a>
+          <a href="#timeline" class="btn secondary">View Journey</a>
+        </div>
+      </div>
+
+      <div class="dashboard reveal">
+        <div class="rotating-ring"></div>
+        <div class="tech-orb"></div>
+        <div class="tech-orb two"></div>
+        <div class="tech-orb three"></div>
+        <div class="floating-card card-1">
+          <div class="card-title">AI Pavement Inspection</div>
+          <div class="bar"><span></span></div>
+          <div class="bar"><span style="animation-delay:1s"></span></div>
+          <div class="bar"><span style="animation-delay:2s"></span></div>
+        </div>
+
+        <div class="floating-card card-2">
+          <div class="card-title">GIS Spatial Analytics</div>
+          <svg width="100%" height="130">
+            <polyline
+              fill="none"
+              stroke="#00f5ff"
+              stroke-width="4"
+              points="0,100 40,70 80,85 120,30 160,55 200,10"
+            >
+              <animate attributeName="points" dur="4s" repeatCount="indefinite"
+                values="0,100 40,70 80,85 120,30 160,55 200,10;
+                        0,90 40,50 80,100 120,40 160,70 200,20;
+                        0,100 40,70 80,85 120,30 160,55 200,10" />
+            </polyline>
+          </svg>
+        </div>
+
+        <div class="floating-card card-3">
+          <div class="card-title">Power BI Intelligence</div>
+          <svg width="100%" height="90">
+            <rect x="20" y="40" width="25" height="40" fill="#00f5ff">
+              <animate attributeName="height" values="30;50;30" dur="3s" repeatCount="indefinite" />
+            </rect>
+            <rect x="70" y="20" width="25" height="60" fill="#7a5cff">
+              <animate attributeName="height" values="60;40;60" dur="2s" repeatCount="indefinite" />
+            </rect>
+            <rect x="120" y="10" width="25" height="70" fill="#00f5ff">
+              <animate attributeName="height" values="70;90;70" dur="4s" repeatCount="indefinite" />
+            </rect>
+          </svg>
+        </div>
+
+        <div class="floating-card card-4">
+          <div class="card-title">Enterprise Data Pipeline</div>
+          <p style="color:#cfd5ff; line-height:1.8; margin-top:10px;">
+            Real-time ETL automation • Predictive analytics • AI learning systems • Secure data workflows
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="section-title reveal">
+      <h2>Flagship Platforms & Innovations</h2>
+      <p>
+        Advanced enterprise applications engineered for infrastructure intelligence,
+        automation, AI-assisted decision making, and national-scale geospatial analytics.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="network-lines">
+            <span style="top:20%; width:100%; animation-delay:0s;"></span>
+            <span style="top:50%; width:100%; animation-delay:1s;"></span>
+            <span style="top:80%; width:100%; animation-delay:2s;"></span>
+          </div>
+          <div class="ai-grid"></div>
+          <div class="pulse-circle"></div>
+          <div class="pulse-circle"></div>
+          <div class="pulse-circle"></div>
+        </div>
+        <div class="project-content">
+          <h3>ClassifyPro</h3>
+          <p>
+            AI-powered pavement QA/QC platform integrating YOLOv8-based crack detection,
+            real-time classification suggestions, automated image matching, intelligent
+            form pre-filling, and continuously evolving AI learning pipelines.
+          </p>
+          <div class="mini-icon-row">
+            <i class="fa-solid fa-brain"></i>
+            <i class="fa-solid fa-camera"></i>
+            <i class="fa-solid fa-chart-line"></i>
+            <i class="fa-solid fa-gears"></i>
+          </div>
+          <div class="tags">
+            <span class="tag">YOLOv8</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">AI Automation</span>
+            <span class="tag">Desktop Engineering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon"><i class="fa-solid fa-earth-americas"></i></div>
+          <div class="network-lines">
+            <span style="top:25%; width:100%; animation-delay:0.5s;"></span>
+            <span style="top:65%; width:100%; animation-delay:1.5s;"></span>
+          </div>
+          <div class="ai-grid"></div>
+          <svg width="100%" height="100%" style="position:absolute; inset:0;">
+            <circle cx="50%" cy="50%" r="70" fill="none" stroke="#00f5ff" stroke-width="2">
+              <animate attributeName="r" values="60;90;60" dur="4s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+        <div class="project-content">
+          <h3>PavInsight</h3>
+          <p>
+            Enterprise pavement analytics ecosystem integrating GIS mapping, predictive
+            condition modeling, ETL pipelines, automated PCI calculations, risk-based
+            capital planning, and AI-powered contractor quality auditing.
+          </p>
+          <div class="mini-icon-row">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <i class="fa-solid fa-database"></i>
+            <i class="fa-solid fa-chart-pie"></i>
+            <i class="fa-solid fa-satellite"></i>
+          </div>
+          <div class="tags">
+            <span class="tag">GIS</span>
+            <span class="tag">Predictive Modeling</span>
+            <span class="tag">ETL</span>
+            <span class="tag">Infrastructure AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon"><i class="fa-solid fa-chart-column"></i></div>
+          <div class="network-lines">
+            <span style="top:30%; width:100%; animation-delay:0.2s;"></span>
+            <span style="top:70%; width:100%; animation-delay:1.2s;"></span>
+          </div>
+          <div class="ai-grid"></div>
+          <svg width="100%" height="100%" style="position:absolute; inset:0;">
+            <polyline fill="none" stroke="#7a5cff" stroke-width="3"
+              points="0,180 80,120 160,150 240,70 320,100 420,20">
+              <animate attributeName="points" dur="5s" repeatCount="indefinite"
+              values="0,180 80,120 160,150 240,70 320,100 420,20;
+                      0,160 80,140 160,100 240,90 320,60 420,40;
+                      0,180 80,120 160,150 240,70 320,100 420,20" />
+            </polyline>
+          </svg>
+        </div>
+        <div class="project-content">
+          <h3>PavementIQ</h3>
+          <p>
+            High-performance road survey analytics application enabling large-scale .MDB
+            ingestion, algorithm-driven distress analysis, automated calculations, and
+            enterprise-grade Excel reporting workflows.
+          </p>
+          <div class="tags">
+            <span class="tag">Data Engineering</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Excel Intelligence</span>
+            <span class="tag">Survey Analytics</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat-box">
+        <div class="stat-number">QAR 500K</div>
+        <div>Annual Cost Savings</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">AI</div>
+        <div>Real-Time Intelligent Systems</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">GIS</div>
+        <div>National Infrastructure Analytics</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">ETL</div>
+        <div>Automated Enterprise Pipelines</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="section-title reveal">
+      <h2>Digital Innovation Journey</h2>
+      <p>
+        From enterprise automation to AI-powered infrastructure intelligence and predictive analytics.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-box">
+          <h4>Digital Transformation Leadership</h4>
+          <p>
+            Led enterprise modernization initiatives focused on scalable automation,
+            intelligent reporting systems, and strategic digital transformation.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-box">
+          <h4>Power BI + GIS Integration</h4>
+          <p>
+            Built advanced analytics dashboards integrating Esri GIS services for
+            real-time spatial infrastructure monitoring and geospatial decision-making.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-box">
+          <h4>Enterprise Data Engineering</h4>
+          <p>
+            Architected robust relational and geospatial data ecosystems supporting
+            large-scale infrastructure analytics and operational workflows.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-box">
+          <h4>AI-Powered Pavement Intelligence</h4>
+          <p>
+            Developed AI-driven pavement inspection systems utilizing object detection,
+            automated quality auditing, and intelligent learning mechanisms.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOFTWARE GALLERY -->
+  <section id="gallery">
+    <div class="section-title reveal">
+      <h2>Software & AI Systems Showcase</h2>
+      <p>Visual showcase of developed enterprise applications, AI systems, and GIS platforms built for real-world infrastructure intelligence.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; padding:0 8%;">
+
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
+        <img src="assets/classifypro.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="padding:20px;">
+          <h3 style="color:#00f5ff; margin-bottom:8px;">ClassifyPro AI System</h3>
+          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
+            AI-powered pavement inspection tool with YOLOv8 crack detection, automated classification, and real-time validation workflow.
+          </p>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
+        <img src="assets/pavinsight.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="padding:20px;">
+          <h3 style="color:#7a5cff; margin-bottom:8px;">PavInsight Platform</h3>
+          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
+            Enterprise GIS analytics platform with predictive modeling, PCI computation, and infrastructure planning dashboards.
+          </p>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
+        <img src="assets/pavementiq.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="padding:20px;">
+          <h3 style="color:#00f5ff; margin-bottom:8px;">PavementIQ Tool</h3>
+          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
+            Data processing and analytics tool for .MDB survey ingestion, automated calculations, and Excel reporting.
+          </p>
+        </div>
+      </div>
+
+    
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
+        <img src="assets/pms_dashboard.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="padding:20px;">
+          <h3 style="color:#00f5ff; margin-bottom:8px;">PMS Dashboard (Power BI)</h3>
+          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
+            Interactive Power BI dashboard for pavement management system analytics, KPI tracking, condition monitoring, and infrastructure decision support.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer
+    <div style="margin-bottom:25px;">
+      <div style="font-size:2rem; font-weight:700; background:linear-gradient(90deg,#00f5ff,#7a5cff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;">
+        Manoj Bhuskade
+      </div>
+      <div style="font-size:1.1rem; color:#c6ceff; letter-spacing:1px;">
+        Ashghal PWA
+      </div>
+    </div>
+    <h2 style="font-size:2.2rem; margin-bottom:15px;">
+      Building Intelligent Infrastructure Systems for the Future
+    </h2>
+    <p>
+      AI • GIS • Data Engineering • Automation • Predictive Analytics • Enterprise Transformation
+    </p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll() {
+      const trigger = window.innerHeight * 0.85;
+
+      reveals.forEach((el) => {
+        const top = el.getBoundingClientRect().top;
+
+        if (top < trigger) {
+          el.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      document.querySelector('.glow.one').style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+      document.querySelector('.glow.two').style.transform = `translate(-${x * 40}px, -${y * 40}px)`;
+    });
+  </script>
+
+</body>
+</html>
