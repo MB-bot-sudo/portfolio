@@ -3,1147 +3,643 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Transformation & AI Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Dr. Manoj Bhuskade | Next-Gen AI Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* =========================================
+       FUTURISTIC VARIABLES
+       ========================================= */
+    :root {
+      --bg-deep: #050507;
+      --bg-surface: #0e0f15;
+      --neo-shadow-dark: rgba(0, 0, 0, 0.8);
+      --neo-shadow-light: rgba(255, 255, 255, 0.03);
+      --primary: #00f0ff;
+      --primary-glow: rgba(0, 240, 255, 0.4);
+      --secondary: #b026ff;
+      --secondary-glow: rgba(176, 38, 255, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-display: 'Rajdhani', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --easing: cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: #050816;
-      color: white;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      font-family: var(--font-body); background-color: var(--bg-deep);
+      color: var(--text-main); overflow-x: hidden; line-height: 1.7;
     }
 
-    body::-webkit-scrollbar {
-      width: 10px;
-    }
+    /* Scrollbar */
+    body::-webkit-scrollbar { width: 6px; }
+    body::-webkit-scrollbar-track { background: var(--bg-deep); }
+    body::-webkit-scrollbar-thumb { background: linear-gradient(var(--primary), var(--secondary)); border-radius: 10px; }
 
-    body::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #00f5ff, #7a5cff);
+    /* =========================================
+       LIVING CANVAS & AMBIENCE
+       ========================================= */
+    #networkCanvas { position: fixed; inset: 0; z-index: -3; opacity: 0.6; pointer-events: none; }
+    
+    .bg-mesh {
+      position: fixed; width: 60vw; height: 60vw; border-radius: 50%;
+      filter: blur(140px); z-index: -2; opacity: 0.15; pointer-events: none;
+      animation: meshPulse 20s infinite alternate var(--easing);
+    }
+    .mesh-cyan { background: radial-gradient(circle, var(--primary), transparent 60%); top: -20%; left: -10%; }
+    .mesh-purple { background: radial-gradient(circle, var(--secondary), transparent 60%); bottom: -20%; right: -10%; animation-delay: -5s; }
+
+    @keyframes meshPulse { 100% { transform: scale(1.3) translate(5%, 5%); opacity: 0.25; } }
+
+    /* =========================================
+       DARK NEOMORPHISM UTILITIES
+       ========================================= */
+    .neo-surface {
+      background: var(--bg-surface);
+      box-shadow: 8px 8px 20px var(--neo-shadow-dark), -8px -8px 20px var(--neo-shadow-light);
+      border-radius: 20px;
+    }
+    .neo-inset {
+      background: var(--bg-deep);
+      box-shadow: inset 5px 5px 15px var(--neo-shadow-dark), inset -5px -5px 15px var(--neo-shadow-light);
       border-radius: 20px;
     }
 
-    .background-grid {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-      z-index: -2;
+    /* =========================================
+       NAVIGATION
+       ========================================= */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(5, 5, 7, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.02);
     }
-
-    .glow {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      filter: blur(120px);
-      z-index: -1;
-      opacity: 0.35;
-      animation: moveGlow 15s infinite alternate ease-in-out;
+    .brand { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;}
+    .brand span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+    
+    .nav-status {
+      display: flex; align-items: center; gap: 10px; font-family: var(--font-display);
+      font-size: 1rem; font-weight: 600; text-transform: uppercase; color: var(--primary);
+      padding: 8px 20px; border-radius: 30px; border: 1px solid var(--primary-glow);
+      background: rgba(0, 240, 255, 0.05); box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
     }
+    .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); animation: blink 1.5s infinite; }
+    @keyframes blink { 50% { opacity: 0.3; } }
 
-    .glow.one {
-      background: #00f5ff;
-      top: -200px;
-      left: -200px;
-    }
-
-    .glow.two {
-      background: #7a5cff;
-      bottom: -250px;
-      right: -250px;
-      animation-delay: 4s;
-    }
-
-    @keyframes moveGlow {
-      from {
-        transform: translateY(0px) translateX(0px);
-      }
-      to {
-        transform: translateY(80px) translateX(60px);
-      }
-    }
-
-    header {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      position: relative;
-    }
-
+    /* =========================================
+       HERO SECTION
+       ========================================= */
     .hero {
-      max-width: 1200px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 50px;
-      align-items: center;
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 0 5%; position: relative; z-index: 10;
+    }
+    .hero-tag {
+      font-family: var(--font-display); font-size: 1.1rem; color: var(--secondary); letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 25px; padding: 8px 24px; border-radius: 30px; background: rgba(176, 38, 255, 0.05);
+      border: 1px solid var(--secondary-glow); box-shadow: 0 0 20px rgba(176, 38, 255, 0.1);
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(4rem, 8vw, 6.5rem); font-weight: 700; line-height: 1.05;
+      margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;
+      background: linear-gradient(180deg, #ffffff 0%, #64748b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
+    }
+    .hero p { max-width: 750px; font-size: 1.2rem; color: var(--text-muted); font-weight: 300; }
+
+    /* Scroll HUD */
+    .scroll-hud {
+      position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 15px;
+    }
+    .scroll-hud span { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; }
+    .scroll-line { width: 1px; height: 60px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+    .scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 50%; background: var(--primary); animation: drop 2s infinite var(--easing); box-shadow: 0 0 10px var(--primary); }
+    @keyframes drop { 100% { top: 150%; } }
+
+    /* =========================================
+       SECTION HEADERS
+       ========================================= */
+    section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 5; }
+    .section-header { text-align: center; margin-bottom: 80px; }
+    .section-header h2 { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+    .section-header p { color: var(--primary); font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; }
+
+    /* =========================================
+       ORBITING BORDER CARDS (Core Competencies)
+       ========================================= */
+    .core-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+    
+    .core-card-wrapper {
+      position: relative; border-radius: 20px; overflow: hidden; padding: 2px;
+      /* The spinning gradient background */
+      background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05));
+      transition: transform 0.4s var(--easing), box-shadow 0.4s;
+    }
+    
+    /* Spinning Magic */
+    .core-card-wrapper::before {
+      content: ''; position: absolute; top: 50%; left: 50%; width: 200%; height: 200%;
+      background: conic-gradient(transparent, transparent, transparent, var(--primary));
+      transform: translate(-50%, -50%) rotate(0deg); animation: spinBorder 4s linear infinite; z-index: 1; opacity: 0; transition: 0.4s;
+    }
+    .core-card-wrapper:hover::before { opacity: 1; }
+    .core-card-wrapper:nth-child(even)::before { background: conic-gradient(transparent, transparent, transparent, var(--secondary)); animation-duration: 5s; }
+    
+    @keyframes spinBorder { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    .core-card {
+      position: relative; z-index: 2; background: var(--bg-surface);
+      border-radius: 18px; padding: 40px 30px; height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    }
+    
+    .core-icon {
+      width: 70px; height: 70px; border-radius: 50%; background: var(--bg-deep);
+      box-shadow: inset 5px 5px 10px var(--neo-shadow-dark), inset -5px -5px 10px var(--neo-shadow-light);
+      display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--primary);
+      margin-bottom: 25px; transition: 0.4s;
+    }
+    .core-card-wrapper:hover .core-icon { color: #fff; box-shadow: 0 0 20px var(--primary-glow); background: var(--primary); }
+    .core-card-wrapper:nth-child(even):hover .core-icon { box-shadow: 0 0 20px var(--secondary-glow); background: var(--secondary); }
+
+    .core-card h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+    .core-card p { font-size: 0.95rem; color: var(--text-muted); }
+
+    /* =========================================
+       CYBER-CIRCUIT ARCHITECTURE SIMULATION
+       ========================================= */
+    .sim-wrapper {
+      position: relative; width: 100%; aspect-ratio: 21/9;
+      border-radius: 30px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at center, rgba(14, 15, 21, 0.8) 0%, var(--bg-deep) 100%);
+      border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+    
+    /* Motherboard Grid */
+    .sim-wrapper::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px; z-index: 0;
     }
 
-    .hero-left h1 {
-      font-size: 4rem;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, #ffffff, #00f5ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .sim-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+    
+    /* Circuit Board 45-degree Paths */
+    .circuit-base { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 2; }
+    .circuit-glow { 
+      fill: none; stroke-width: 3; stroke-linecap: square;
+      stroke-dasharray: 40 200; animation: circuitFlow 3s linear infinite;
     }
+    .circuit-cyan { stroke: var(--primary); filter: drop-shadow(0 0 8px var(--primary)); }
+    .circuit-purple { stroke: var(--secondary); filter: drop-shadow(0 0 8px var(--secondary)); animation-delay: 1.5s; }
 
-    .hero-left p {
-      color: #d2d7ff;
-      line-height: 1.9;
-      font-size: 1.1rem;
-      margin-bottom: 35px;
+    @keyframes circuitFlow { from { stroke-dashoffset: 240; } to { stroke-dashoffset: 0; } }
+
+    /* Nodes */
+    .sim-node {
+      position: absolute; transform: translate(-50%, -50%); z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-
-    .tagline {
-      display: inline-block;
-      padding: 10px 20px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.04);
-      border-radius: 40px;
-      margin-bottom: 25px;
-      color: #00f5ff;
-      letter-spacing: 1px;
-      font-size: 0.9rem;
-      backdrop-filter: blur(10px);
+    .sim-hex {
+      width: 70px; height: 70px; background: var(--bg-surface);
+      border: 2px solid rgba(255,255,255,0.1); border-radius: 16px;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 1.8rem; color: var(--text-main); position: relative;
+      box-shadow: 8px 8px 15px rgba(0,0,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.05);
+      transition: 0.3s;
     }
+    .sim-node:hover .sim-hex { transform: scale(1.1); border-color: var(--primary); box-shadow: 0 0 30px var(--primary-glow); color: var(--primary); }
+    .sim-node.node-ai:hover .sim-hex { border-color: var(--secondary); box-shadow: 0 0 30px var(--secondary-glow); color: var(--secondary); }
 
-    .buttons {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+    .sim-node span { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 5px 10px #000; }
+    .sim-node p { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
 
-    .btn {
-      padding: 14px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.4s ease;
-    }
-
-    .btn.primary {
-      background: linear-gradient(90deg, #00f5ff, #7a5cff);
-      color: white;
-      box-shadow: 0 10px 40px rgba(0,245,255,0.35);
-    }
-
-    .btn.secondary {
-      border: 1px solid rgba(255,255,255,0.15);
-      color: white;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .btn:hover {
-      transform: translateY(-5px);
-    }
-
-    .dashboard {
-      position: relative;
-      width: 100%;
-      height: 600px;
-      perspective: 1000px;
-    }
-
-    .floating-card {
-      position: absolute;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      padding: 25px;
-      overflow: hidden;
-      animation: float 6s infinite ease-in-out;
-    }
-
-    .hero-icon {
-      font-size: 4rem;
-      margin-bottom: 15px;
-      background: linear-gradient(90deg, #00f5ff, #7a5cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: iconPulse 3s infinite ease-in-out;
-    }
-
-    @keyframes iconPulse {
-      0%,100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.12);
-      }
-    }
-
-    .rotating-ring {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border: 2px dashed rgba(0,245,255,0.25);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: rotateRing 18s linear infinite;
-    }
-
-    @keyframes rotateRing {
-      from {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-      to {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-
-    .tech-orb {
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #00f5ff;
-      box-shadow: 0 0 20px #00f5ff;
-      animation: orbit 8s linear infinite;
-    }
-
-    .tech-orb.two {
-      animation-delay: 2s;
-      background: #7a5cff;
-      box-shadow: 0 0 20px #7a5cff;
-    }
-
-    .tech-orb.three {
-      animation-delay: 4s;
-    }
-
-    @keyframes orbit {
-      from {
-        transform: rotate(0deg) translateX(160px) rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg) translateX(160px) rotate(-360deg);
-      }
-    }
-
-    .project-icon {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 2rem;
-      color: #00f5ff;
-      z-index: 5;
-      animation: floatIcon 4s ease-in-out infinite;
-    }
-
-    @keyframes floatIcon {
-      0%,100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .network-lines {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .network-lines span {
-      position: absolute;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #00f5ff, transparent);
-      animation: moveLine 4s linear infinite;
-      opacity: 0.6;
-    }
-
-    @keyframes moveLine {
-      from {
-        transform: translateX(-120%);
-      }
-      to {
-        transform: translateX(120%);
-      }
-    }
-
-    .mini-icon-row {
-      display: flex;
-      gap: 15px;
-      margin-top: 18px;
-      font-size: 1.3rem;
-      color: #00f5ff;
-    }
-
-    .mini-icon-row i {
-      animation: bounceIcon 3s infinite ease-in-out;
-    }
-
-    .mini-icon-row i:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-
-    .mini-icon-row i:nth-child(3) {
-      animation-delay: 0.8s;
-    }
-
-    .mini-icon-row i:nth-child(4) {
-      animation-delay: 1.2s;
-    }
-
-    @keyframes bounceIcon {
-      0%,100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-
-    .floating-card {
-      position: absolute;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      padding: 25px;
-      overflow: hidden;
-      animation: float 6s infinite ease-in-out;
-    }
-
-    .floating-card::before {
-      content: "";
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, rgba(0,245,255,0.5), transparent);
-      top: -40px;
-      right: -40px;
-    }
-
-    .card-1 {
-      width: 320px;
-      height: 180px;
-      top: 0;
-      left: 40px;
-    }
-
-    .card-2 {
-      width: 280px;
-      height: 220px;
-      top: 220px;
-      left: 0;
-      animation-delay: 1s;
-    }
-
-    .card-3 {
-      width: 260px;
-      height: 160px;
-      top: 120px;
-      right: 20px;
-      animation-delay: 2s;
-    }
-
-    .card-4 {
-      width: 340px;
-      height: 180px;
-      bottom: 20px;
-      right: 0;
-      animation-delay: 3s;
-    }
-
-    @keyframes float {
-      0%,100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-
-    .card-title {
-      font-size: 1rem;
-      color: #00f5ff;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .bar {
-      height: 10px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-      background: rgba(255,255,255,0.08);
-      overflow: hidden;
-    }
-
-    .bar span {
-      display: block;
-      height: 100%;
-      border-radius: 20px;
-      background: linear-gradient(90deg, #00f5ff, #7a5cff);
-      animation: loading 3s infinite ease-in-out;
-    }
-
-    @keyframes loading {
-      0% {
-        width: 20%;
-      }
-      50% {
-        width: 90%;
-      }
-      100% {
-        width: 40%;
-      }
-    }
-
-    section {
-      padding: 100px 8%;
-      position: relative;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 70px;
-    }
-
-    .section-title h2 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-
-    .section-title p {
-      color: #bcc5ff;
-      max-width: 900px;
-      margin: auto;
-      line-height: 1.8;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 35px;
-    }
-
+    /* =========================================
+       3D TILT PROJECTS WITH GLARE (Physics JS)
+       ========================================= */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; perspective: 1500px; }
+    
     .project-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 28px;
-      overflow: hidden;
-      transition: 0.4s ease;
-      position: relative;
-      backdrop-filter: blur(10px);
+      position: relative; background: var(--bg-surface); border-radius: 24px; padding: 40px;
+      transform-style: preserve-3d; border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 15px 15px 30px rgba(0,0,0,0.8), inset 1px 1px 2px rgba(255,255,255,0.05);
+      will-change: transform; transition: transform 0.1s;
     }
-
-    .project-card:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 30px 60px rgba(0,245,255,0.18);
+    
+    /* The Glare Layer */
+    .glare {
+      position: absolute; inset: 0; border-radius: 24px; pointer-events: none; z-index: 10;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 50%);
+      opacity: 0; transition: opacity 0.3s; mix-blend-mode: overlay;
     }
+    .project-card:hover .glare { opacity: 1; }
 
-    .project-header {
-      height: 220px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0d122e, #1b2757);
+    .project-content { transform: translateZ(40px); /* 3D pop out */ }
+    
+    .project-icon {
+      width: 60px; height: 60px; border-radius: 14px; background: var(--bg-deep);
+      display: flex; justify-content: center; align-items: center; font-size: 1.8rem;
+      color: var(--primary); margin-bottom: 25px; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.8);
+      border: 1px solid rgba(0, 240, 255, 0.2);
     }
+    .project-card:nth-child(even) .project-icon { color: var(--secondary); border-color: rgba(176, 38, 255, 0.2); }
 
-    .ai-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,245,255,0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,245,255,0.12) 1px, transparent 1px);
-      background-size: 30px 30px;
-      animation: moveGrid 8s linear infinite;
+    .project-card h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+    .project-card p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+    
+    .tech-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .badge { padding: 6px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); }
+
+    /* =========================================
+       CINEMATIC GALLERY
+       ========================================= */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+    
+    .gallery-item {
+      aspect-ratio: 16/10; border-radius: 20px; overflow: hidden; position: relative;
+      box-shadow: 10px 10px 25px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05);
+      cursor: crosshair;
     }
-
-    @keyframes moveGrid {
-      from {
-        transform: translateY(0px);
-      }
-      to {
-        transform: translateY(30px);
-      }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s var(--easing); opacity: 0.6; filter: grayscale(50%); }
+    .gallery-item:hover img { transform: scale(1.1); opacity: 1; filter: grayscale(0%); }
+    
+    .gallery-caption {
+      position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent 70%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
+      opacity: 0; transform: translateY(20px); transition: 0.5s var(--easing); pointer-events: none;
     }
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+    .gallery-caption h4 { font-family: var(--font-display); font-size: 1.5rem; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+    .gallery-caption p { font-size: 0.9rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
-    .pulse-circle {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid rgba(0,245,255,0.5);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: pulse 3s infinite;
-    }
+    /* =========================================
+       SCROLL REVEALS
+       ========================================= */
+    .reveal { opacity: 0; transform: translateY(50px); transition: 1s var(--easing); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
-    .pulse-circle:nth-child(2) {
-      width: 180px;
-      height: 180px;
-      animation-delay: 1s;
-    }
+    /* FOOTER */
+    footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.02); background: #020203; }
+    footer h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
 
-    .pulse-circle:nth-child(3) {
-      width: 240px;
-      height: 240px;
-      animation-delay: 2s;
-    }
-
-    @keyframes pulse {
-      0% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(0.8);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1.4);
-      }
-    }
-
-    .project-content {
-      padding: 30px;
-    }
-
-    .project-content h3 {
-      font-size: 1.6rem;
-      margin-bottom: 15px;
-    }
-
-    .project-content p {
-      color: #c7d0ff;
-      line-height: 1.8;
-      margin-bottom: 25px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .tag {
-      padding: 8px 14px;
-      border-radius: 30px;
-      background: rgba(0,245,255,0.1);
-      border: 1px solid rgba(0,245,255,0.2);
-      color: #00f5ff;
-      font-size: 0.85rem;
-    }
-
-    .timeline {
-      max-width: 1100px;
-      margin: auto;
-      position: relative;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(#00f5ff, #7a5cff);
-    }
-
-    .timeline-item {
-      width: 50%;
-      padding: 30px;
-      position: relative;
-    }
-
-    .timeline-item:nth-child(odd) {
-      left: 0;
-      text-align: right;
-    }
-
-    .timeline-item:nth-child(even) {
-      left: 50%;
-    }
-
-    .timeline-box {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 25px;
-      padding: 25px;
-      backdrop-filter: blur(10px);
-      transition: 0.4s ease;
-    }
-
-    .timeline-box:hover {
-      transform: scale(1.03);
-      box-shadow: 0 20px 40px rgba(0,245,255,0.15);
-    }
-
-    .timeline-box h4 {
-      margin-bottom: 10px;
-      color: #00f5ff;
-      font-size: 1.2rem;
-    }
-
-    .timeline-box p {
-      color: #d2d7ff;
-      line-height: 1.7;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      top: 45px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #00f5ff;
-      border: 4px solid #050816;
-      z-index: 10;
-    }
-
-    .timeline-item:nth-child(odd)::before {
-      right: -9px;
-    }
-
-    .timeline-item:nth-child(even)::before {
-      left: -9px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
-    }
-
-    .stat-box {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 25px;
-      padding: 40px 20px;
-      text-align: center;
-      transition: 0.4s ease;
-    }
-
-    .stat-box:hover {
-      transform: translateY(-10px);
-    }
-
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #00f5ff, #7a5cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-
-    footer {
-      padding: 80px 20px;
-      text-align: center;
-      color: #9ca7dd;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: 1s ease;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-
-    @media(max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-left h1 {
-        font-size: 3rem;
-      }
-
-      .dashboard {
-        height: 500px;
-      }
-
-      .timeline::before {
-        left: 20px;
-      }
-
-      .timeline-item,
-      .timeline-item:nth-child(even),
-      .timeline-item:nth-child(odd) {
-        width: 100%;
-        left: 0;
-        padding-left: 60px;
-        text-align: left;
-      }
-
-      .timeline-item::before,
-      .timeline-item:nth-child(odd)::before,
-      .timeline-item:nth-child(even)::before {
-        left: 11px;
-      }
-    }
-
-    @media(max-width: 700px) {
-      .hero-left h1 {
-        font-size: 2.4rem;
-      }
-
-      .section-title h2 {
-        font-size: 2.2rem;
-      }
-
-      .floating-card {
-        transform: scale(0.85);
-      }
+    /* RESPONSIVE */
+    @media(max-width: 900px) {
+      .hero h1 { font-size: 3.5rem; }
+      .sim-wrapper { display: none; /* SVG scaling issues on mobile mitigated by hiding complex desktop arch */ }
+      .project-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- PROFESSIONAL JOB PROFILE HEADER -->
-  <div style="position:relative; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:22px 50px; background:rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px);">
+  <canvas id="networkCanvas"></canvas>
+  <div class="bg-mesh mesh-cyan"></div>
+  <div class="bg-mesh mesh-purple"></div>
 
-    <!-- LEFT: PROFILE INFO -->
-    <div style="max-width:70%;">
-      <div style="font-size:2rem; font-weight:700; letter-spacing:2px; background:linear-gradient(90deg,#00f5ff,#7a5cff); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
-        Dr. Manoj Bhuskade
-      </div>
+  <nav>
+    <div class="brand">Suresh <span>S</span></div>
+    <div class="nav-status">
+      <div class="status-dot"></div> Security: Online
+    </div>
+  </nav>
 
-      <div style="margin-top:6px; font-size:1.05rem; color:#cbd6ff; letter-spacing:1px;">
-        Digital Transformation & AI | GIS & Data Engineering Specialist
-      </div>
+  <section class="hero">
+    <div class="hero-tag reveal active">AI & System Architecture</div>
+    <h1 class="reveal active" style="transition-delay: 0.1s;">Futuristic<br>Intelligence</h1>
+    <p class="reveal active" style="transition-delay: 0.2s;">
+      Engineering the precise convergence of deep learning computer vision, robust geospatial data analytics, and flawless automated enterprise pipelines.
+    </p>
+    
+    <div class="scroll-hud">
+      <span>Initiate</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-      <div style="margin-top:10px; color:#aeb8ff; font-size:0.95rem; line-height:1.6;">
-        Enterprise AI systems • GIS analytics platforms • Automated ETL pipelines •
-        Infrastructure intelligence solutions for national-scale operations
-      </div>
+  <section id="core">
+    <div class="section-header reveal">
+      <h2>Engineering Core</h2>
+      <p>Systematic Technical Proficiencies</p>
     </div>
 
-    <!-- RIGHT: ORG + KPI STYLE -->
-    <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
-      <div style="padding:10px 18px; border-radius:30px; background:rgba(0,245,255,0.08); border:1px solid rgba(0,245,255,0.25); color:#00f5ff; font-weight:600; letter-spacing:1px;">
-        Ashghal PWA
-      </div>
-
-      <div style="display:flex; gap:10px;">
-        <div style="padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); text-align:center;">
-          <div style="font-size:0.9rem; color:#00f5ff; font-weight:600;">AI</div>
-          <div style="font-size:0.7rem; color:#cfd6ff;">Systems</div>
-        </div>
-
-        <div style="padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); text-align:center;">
-          <div style="font-size:0.9rem; color:#7a5cff; font-weight:600;">GIS</div>
-          <div style="font-size:0.7rem; color:#cfd6ff;">Analytics</div>
-        </div>
-
-        <div style="padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); text-align:center;">
-          <div style="font-size:0.9rem; color:#00f5ff; font-weight:600;">₹</div>
-          <div style="font-size:0.7rem; color:#cfd6ff;">500K Save</div>
+    <div class="core-grid">
+      <div class="core-card-wrapper reveal">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-sitemap"></i></div>
+          <h3>System Architecture</h3>
+          <p>Designing scalable blueprints and data routing pipelines for enterprise apps.</p>
         </div>
       </div>
-    </div>
-
-  </div>
-
-    <div style="padding:10px 18px; border-radius:30px; background:rgba(0,245,255,0.08); border:1px solid rgba(0,245,255,0.25); color:#00f5ff; font-weight:600; letter-spacing:1px;">
-      Ashghal PWA
-    </div>
-  </div>
-    <div style="font-size:1.1rem; color:#cbd6ff; margin-top:6px; letter-spacing:1px;">
-      Ashghal PWA
-    </div>
-  </div>
-
-  <div class="background-grid"></div>
-  <div class="glow one"></div>
-  <div class="glow two"></div>
-
-  <header>
-    <div class="hero">
-      <div class="hero-left reveal">
-        <div class="tagline">DIGITAL TRANSFORMATION • AI • GIS • ANALYTICS</div>
-        <div class="hero-icon">
-          <i class="fa-solid fa-microchip"></i>
-        </div>
-        <div style="margin-bottom:20px;">
-          <div style="font-size:1.1rem; color:#00f5ff; letter-spacing:2px; margin-bottom:8px; font-weight:600;">
-            Dr. Manoj Bhuskade
-          </div>
-          <div style="font-size:1rem; color:#b9c3ff; letter-spacing:1px;">
-            Ashghal PWA
-          </div>
-        </div>
-        <h1>Engineering Intelligent Infrastructure Solutions</h1>
-        <p>
-          Enterprise-grade AI platforms, GIS analytics systems, automated ETL pipelines,
-          intelligent pavement inspection tools, predictive infrastructure analytics, and
-          scalable digital transformation solutions built for national-scale operations.
-        </p>
-
-        <div class="buttons">
-          <a href="#projects" class="btn primary">Explore Projects</a>
-          <a href="#timeline" class="btn secondary">View Journey</a>
+      <div class="core-card-wrapper reveal" style="transition-delay: 0.1s;">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <h3>Data Science</h3>
+          <p>Extracting and transforming vast datasets to drive infra decision-making.</p>
         </div>
       </div>
-
-      <div class="dashboard reveal">
-        <div class="rotating-ring"></div>
-        <div class="tech-orb"></div>
-        <div class="tech-orb two"></div>
-        <div class="tech-orb three"></div>
-        <div class="floating-card card-1">
-          <div class="card-title">AI Pavement Inspection</div>
-          <div class="bar"><span></span></div>
-          <div class="bar"><span style="animation-delay:1s"></span></div>
-          <div class="bar"><span style="animation-delay:2s"></span></div>
+      <div class="core-card-wrapper reveal" style="transition-delay: 0.2s;">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-gears"></i></div>
+          <h3>Automation</h3>
+          <p>Dismantling manual bottlenecks with high-speed programmatic workflows.</p>
         </div>
-
-        <div class="floating-card card-2">
-          <div class="card-title">GIS Spatial Analytics</div>
-          <svg width="100%" height="130">
-            <polyline
-              fill="none"
-              stroke="#00f5ff"
-              stroke-width="4"
-              points="0,100 40,70 80,85 120,30 160,55 200,10"
-            >
-              <animate attributeName="points" dur="4s" repeatCount="indefinite"
-                values="0,100 40,70 80,85 120,30 160,55 200,10;
-                        0,90 40,50 80,100 120,40 160,70 200,20;
-                        0,100 40,70 80,85 120,30 160,55 200,10" />
-            </polyline>
-          </svg>
+      </div>
+      <div class="core-card-wrapper reveal" style="transition-delay: 0.3s;">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-robot"></i></div>
+          <h3>AI Model Training</h3>
+          <p>Training custom YOLOv8 deep learning models for accurate object detection.</p>
         </div>
-
-        <div class="floating-card card-3">
-          <div class="card-title">Power BI Intelligence</div>
-          <svg width="100%" height="90">
-            <rect x="20" y="40" width="25" height="40" fill="#00f5ff">
-              <animate attributeName="height" values="30;50;30" dur="3s" repeatCount="indefinite" />
-            </rect>
-            <rect x="70" y="20" width="25" height="60" fill="#7a5cff">
-              <animate attributeName="height" values="60;40;60" dur="2s" repeatCount="indefinite" />
-            </rect>
-            <rect x="120" y="10" width="25" height="70" fill="#00f5ff">
-              <animate attributeName="height" values="70;90;70" dur="4s" repeatCount="indefinite" />
-            </rect>
-          </svg>
+      </div>
+      <div class="core-card-wrapper reveal" style="transition-delay: 0.4s;">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-chart-pie"></i></div>
+          <h3>Business Intelligence</h3>
+          <p>Orchestrating Power BI semantic models and interactive executive dashboards.</p>
         </div>
-
-        <div class="floating-card card-4">
-          <div class="card-title">Enterprise Data Pipeline</div>
-          <p style="color:#cfd5ff; line-height:1.8; margin-top:10px;">
-            Real-time ETL automation • Predictive analytics • AI learning systems • Secure data workflows
-          </p>
+      </div>
+      <div class="core-card-wrapper reveal" style="transition-delay: 0.5s;">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-earth-americas"></i></div>
+          <h3>GIS Spatial Analytics</h3>
+          <p>Fusing geographic information systems with real-time operational field data.</p>
+        </div>
+      </div>
+      <div class="core-card-wrapper reveal" style="transition-delay: 0.6s;">
+        <div class="core-card">
+          <div class="core-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3>App Design & Dev</h3>
+          <p>Building polished full-stack UI/UX interfaces bridging humans and AI logic.</p>
         </div>
       </div>
     </div>
-  </header>
+  </section>
+
+  <section id="simulation">
+    <div class="section-header reveal">
+      <h2>Architecture Simulation</h2>
+      <p>Real-Time Circuit Data Routing</p>
+    </div>
+
+    <div class="sim-wrapper reveal">
+      <svg class="sim-svg" viewBox="0 0 1000 428" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <path id="track-ai" d="M 150,214 L 300,214 L 350,120 L 500,120" />
+          <path id="track-gis" d="M 150,214 L 300,214 L 350,308 L 500,308" />
+          <path id="track-out-ai" d="M 500,120 L 650,120 L 700,214 L 850,214" />
+          <path id="track-out-gis" d="M 500,308 L 650,308 L 700,214 L 850,214" />
+        </defs>
+
+        <path class="circuit-base" d="M 150,214 L 300,214 L 350,120 L 500,120" />
+        <path class="circuit-base" d="M 150,214 L 300,214 L 350,308 L 500,308" />
+        <path class="circuit-base" d="M 500,120 L 650,120 L 700,214 L 850,214" />
+        <path class="circuit-base" d="M 500,308 L 650,308 L 700,214 L 850,214" />
+
+        <path class="circuit-glow circuit-cyan" d="M 150,214 L 300,214 L 350,120 L 500,120" />
+        <path class="circuit-glow circuit-purple" d="M 150,214 L 300,214 L 350,308 L 500,308" />
+        <path class="circuit-glow circuit-cyan" style="animation-delay: 1s;" d="M 500,120 L 650,120 L 700,214 L 850,214" />
+        <path class="circuit-glow circuit-purple" style="animation-delay: 2s;" d="M 500,308 L 650,308 L 700,214 L 850,214" />
+      </svg>
+
+      <div class="sim-node" style="left: 15%; top: 50%;">
+        <div class="sim-hex"><i class="fa-solid fa-server"></i></div>
+        <span>Data Ingestion</span>
+        <p>Raw Engineering Input</p>
+      </div>
+
+      <div class="sim-node node-ai" style="left: 50%; top: 28%;">
+        <div class="sim-hex"><i class="fa-solid fa-brain"></i></div>
+        <span>AI Processing</span>
+        <p>YOLOv8 Vision Model</p>
+      </div>
+
+      <div class="sim-node node-ai" style="left: 50%; top: 72%;">
+        <div class="sim-hex"><i class="fa-solid fa-earth-americas"></i></div>
+        <span>GIS Mapping</span>
+        <p>Spatial Alignment Sync</p>
+      </div>
+
+      <div class="sim-node" style="left: 85%; top: 50%;">
+        <div class="sim-hex"><i class="fa-solid fa-chart-column"></i></div>
+        <span style="color:var(--primary);">BI Analytics</span>
+        <p>Dashboard Output</p>
+      </div>
+    </div>
+  </section>
 
   <section id="projects">
-    <div class="section-title reveal">
-      <h2>Flagship Platforms & Innovations</h2>
-      <p>
-        Advanced enterprise applications engineered for infrastructure intelligence,
-        automation, AI-assisted decision making, and national-scale geospatial analytics.
-      </p>
+    <div class="section-header reveal">
+      <h2>Deployed Systems</h2>
+      <p>Operational Infrastructure Intelligence</p>
     </div>
 
-    <div class="projects-grid">
-
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-icon"><i class="fa-solid fa-robot"></i></div>
-          <div class="network-lines">
-            <span style="top:20%; width:100%; animation-delay:0s;"></span>
-            <span style="top:50%; width:100%; animation-delay:1s;"></span>
-            <span style="top:80%; width:100%; animation-delay:2s;"></span>
-          </div>
-          <div class="ai-grid"></div>
-          <div class="pulse-circle"></div>
-          <div class="pulse-circle"></div>
-          <div class="pulse-circle"></div>
-        </div>
+    <div class="project-grid">
+      <div class="project-card tilt-card reveal">
+        <div class="glare"></div>
         <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-camera"></i></div>
           <h3>ClassifyPro</h3>
-          <p>
-            AI-powered pavement QA/QC platform integrating YOLOv8-based crack detection,
-            real-time classification suggestions, automated image matching, intelligent
-            form pre-filling, and continuously evolving AI learning pipelines.
-          </p>
-          <div class="mini-icon-row">
-            <i class="fa-solid fa-brain"></i>
-            <i class="fa-solid fa-camera"></i>
-            <i class="fa-solid fa-chart-line"></i>
-            <i class="fa-solid fa-gears"></i>
-          </div>
-          <div class="tags">
-            <span class="tag">YOLOv8</span>
-            <span class="tag">Computer Vision</span>
-            <span class="tag">AI Automation</span>
-            <span class="tag">Desktop Engineering</span>
+          <p>AI-powered pavement QA/QC platform integrating custom YOLOv8-based models for crack detection. It provides real-time classification suggestions, automated image matching, and relies on continuously evolving AI learning pipelines.</p>
+          <div class="tech-badges">
+            <span class="badge">Computer Vision</span>
+            <span class="badge">YOLOv8</span>
           </div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-header">
+      <div class="project-card tilt-card reveal" style="transition-delay: 0.1s;">
+        <div class="glare"></div>
+        <div class="project-content">
           <div class="project-icon"><i class="fa-solid fa-earth-americas"></i></div>
-          <div class="network-lines">
-            <span style="top:25%; width:100%; animation-delay:0.5s;"></span>
-            <span style="top:65%; width:100%; animation-delay:1.5s;"></span>
-          </div>
-          <div class="ai-grid"></div>
-          <svg width="100%" height="100%" style="position:absolute; inset:0;">
-            <circle cx="50%" cy="50%" r="70" fill="none" stroke="#00f5ff" stroke-width="2">
-              <animate attributeName="r" values="60;90;60" dur="4s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
-        </div>
-        <div class="project-content">
           <h3>PavInsight</h3>
-          <p>
-            Enterprise pavement analytics ecosystem integrating GIS mapping, predictive
-            condition modeling, ETL pipelines, automated PCI calculations, risk-based
-            capital planning, and AI-powered contractor quality auditing.
-          </p>
-          <div class="mini-icon-row">
-            <i class="fa-solid fa-map-location-dot"></i>
-            <i class="fa-solid fa-database"></i>
-            <i class="fa-solid fa-chart-pie"></i>
-            <i class="fa-solid fa-satellite"></i>
-          </div>
-          <div class="tags">
-            <span class="tag">GIS</span>
-            <span class="tag">Predictive Modeling</span>
-            <span class="tag">ETL</span>
-            <span class="tag">Infrastructure AI</span>
+          <p>An enterprise pavement analytics ecosystem that integrates complex GIS mapping with predictive condition modeling. Features ETL pipelines, automated PCI calculations, risk-based capital planning, and quality auditing.</p>
+          <div class="tech-badges">
+            <span class="badge">GIS Analytics</span>
+            <span class="badge">Predictive ETL</span>
           </div>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-icon"><i class="fa-solid fa-chart-column"></i></div>
-          <div class="network-lines">
-            <span style="top:30%; width:100%; animation-delay:0.2s;"></span>
-            <span style="top:70%; width:100%; animation-delay:1.2s;"></span>
-          </div>
-          <div class="ai-grid"></div>
-          <svg width="100%" height="100%" style="position:absolute; inset:0;">
-            <polyline fill="none" stroke="#7a5cff" stroke-width="3"
-              points="0,180 80,120 160,150 240,70 320,100 420,20">
-              <animate attributeName="points" dur="5s" repeatCount="indefinite"
-              values="0,180 80,120 160,150 240,70 320,100 420,20;
-                      0,160 80,140 160,100 240,90 320,60 420,40;
-                      0,180 80,120 160,150 240,70 320,100 420,20" />
-            </polyline>
-          </svg>
-        </div>
+      <div class="project-card tilt-card reveal">
+        <div class="glare"></div>
         <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-layer-group"></i></div>
           <h3>PavementIQ</h3>
-          <p>
-            A comprehensive QC/QA system for pavement condition survey data. It performs automated multi-checkpoint validation, PCI calculations, spatial analysis, interactive GIS mapping, and generates executive audit reports.
-          </p>
-          <div class="tags">
-            <span class="tag">Data Engineering</span>
-            <span class="tag">Automation</span>
-            <span class="tag">Excel Intelligence</span>
-            <span class="tag">Survey Analytics</span>
+          <p>A comprehensive QC/QA system engineered strictly for raw pavement condition survey data. It performs automated multi-checkpoint algorithmic validation, PCI calculations, and dynamically generates executive audit reports.</p>
+          <div class="tech-badges">
+            <span class="badge">QA/QC Automation</span>
+            <span class="badge">Data Engineering</span>
           </div>
         </div>
       </div>
 
-    </div>
-
-    <div class="stats reveal">
-      <div class="stat-box">
-        <div class="stat-number">QAR 500K</div>
-        <div>Annual Cost Savings</div>
-      </div>
-
-      <div class="stat-box">
-        <div class="stat-number">AI</div>
-        <div>Real-Time Intelligent Systems</div>
-      </div>
-
-      <div class="stat-box">
-        <div class="stat-number">GIS</div>
-        <div>National Infrastructure Analytics</div>
-      </div>
-
-      <div class="stat-box">
-        <div class="stat-number">ETL</div>
-        <div>Automated Enterprise Pipelines</div>
+      <div class="project-card tilt-card reveal" style="transition-delay: 0.1s;">
+        <div class="glare"></div>
+        <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-chart-column"></i></div>
+          <h3>PMS Dashboard</h3>
+          <p>A sophisticated interactive Power BI dashboard serving as the nerve center for pavement management system analytics. Built for high-level KPI tracking, continuous condition monitoring, and predictive infrastructure support.</p>
+          <div class="tech-badges">
+            <span class="badge">Power BI</span>
+            <span class="badge">Semantic Modeling</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="timeline">
-    <div class="section-title reveal">
-      <h2>Digital Innovation Journey</h2>
-      <p>
-        From enterprise automation to AI-powered infrastructure intelligence and predictive analytics.
-      </p>
-    </div>
-
-    <div class="timeline">
-
-      <div class="timeline-item reveal">
-        <div class="timeline-box">
-          <h4>Digital Transformation Leadership</h4>
-          <p>
-            Led enterprise modernization initiatives focused on scalable automation,
-            intelligent reporting systems, and strategic digital transformation.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-box">
-          <h4>Power BI + GIS Integration</h4>
-          <p>
-            Built advanced analytics dashboards integrating Esri GIS services for
-            real-time spatial infrastructure monitoring and geospatial decision-making.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-box">
-          <h4>Enterprise Data Engineering</h4>
-          <p>
-            Architected robust relational and geospatial data ecosystems supporting
-            large-scale infrastructure analytics and operational workflows.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-box">
-          <h4>AI-Powered Pavement Intelligence</h4>
-          <p>
-            Developed AI-driven pavement inspection systems utilizing object detection,
-            automated quality auditing, and intelligent learning mechanisms.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SOFTWARE GALLERY -->
   <section id="gallery">
-    <div class="section-title reveal">
-      <h2>Software & AI Systems Showcase</h2>
-      <p>Visual showcase of developed enterprise applications, AI systems, and GIS platforms built for real-world infrastructure intelligence.</p>
+    <div class="section-header reveal">
+      <h2>Interface Gallery</h2>
+      <p>Visual Software Snapshots</p>
     </div>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; padding:0 8%;">
-
-      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
-        <img src="assets/classifypro.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-        <div style="padding:20px;">
-          <h3 style="color:#00f5ff; margin-bottom:8px;">ClassifyPro AI System</h3>
-          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
-            AI-powered pavement inspection tool with YOLOv8 crack detection, automated classification, and real-time validation workflow.
-          </p>
-        </div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
-        <img src="assets/pavinsight.PNG" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-        <div style="padding:20px;">
-          <h3 style="color:#7a5cff; margin-bottom:8px;">PavInsight Platform</h3>
-          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
-            Enterprise GIS analytics platform with predictive modeling, PCI computation, and infrastructure planning dashboards.
-          </p>
-        </div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
-        <img src="assets/pavementiq.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-        <div style="padding:20px;">
-          <h3 style="color:#00f5ff; margin-bottom:8px;">Pavment Audit Engine</h3>
-          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
-            An advanced QC/QA application for pavement condition surveys, featuring automated data validation, PCI analysis, GIS visualization, and professional audit reporting.
-          </p>
-        </div>
-      </div>
-
     
-      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px); transition:0.4s;">
-        <img src="assets/pms_dashboard.png" style="width:100%; height:200px; object-fit:cover; display:block; transition:0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-        <div style="padding:20px;">
-          <h3 style="color:#00f5ff; margin-bottom:8px;">PMS Dashboard (Power BI)</h3>
-          <p style="color:#cbd6ff; font-size:0.9rem; line-height:1.6;">
-            Interactive Power BI dashboard for pavement management system analytics, KPI tracking, condition monitoring, and infrastructure decision support.
-          </p>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <img src="assets/classifypro.png" alt="ClassifyPro" onerror="this.src='https://via.placeholder.com/800x500/0e0f15/00f0ff?text=ClassifyPro+Vision+AI'" />
+        <div class="gallery-caption">
+          <h4>ClassifyPro</h4>
+          <p>Vision Pipeline</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item reveal" style="transition-delay: 0.1s;">
+        <img src="assets/pavinsight.PNG" alt="PavInsight" onerror="this.src='https://via.placeholder.com/800x500/0e0f15/b026ff?text=PavInsight+GIS'" />
+        <div class="gallery-caption">
+          <h4>PavInsight</h4>
+          <p>GIS Condition Modeling</p>
         </div>
       </div>
 
+      <div class="gallery-item reveal" style="transition-delay: 0.2s;">
+        <img src="assets/pavementiq.png" alt="PavementIQ" onerror="this.src='https://via.placeholder.com/800x500/0e0f15/00f0ff?text=PavementIQ'" />
+        <div class="gallery-caption">
+          <h4>PavementIQ</h4>
+          <p>QA/QC Validation</p>
+        </div>
+      </div>
+
+      <div class="gallery-item reveal" style="transition-delay: 0.3s;">
+        <img src="assets/pms_dashboard.png" alt="PMS Dashboard" onerror="this.src='https://via.placeholder.com/800x500/0e0f15/b026ff?text=PMS+Dashboard'" />
+        <div class="gallery-caption">
+          <h4>PMS Dashboard</h4>
+          <p>Executive Power BI</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer
-    <div style="margin-bottom:25px;">
-      <div style="font-size:2rem; font-weight:700; background:linear-gradient(90deg,#00f5ff,#7a5cff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;">
-        Dr. Manoj Bhuskade
-      </div>
-      <div style="font-size:1.1rem; color:#c6ceff; letter-spacing:1px;">
-        Ashghal PWA
-      </div>
-    </div>
-    <h2 style="font-size:2.2rem; margin-bottom:15px;">
-      Building Intelligent Infrastructure Systems for the Future
-    </h2>
-    <p>
-      AI • GIS • Data Engineering • Automation • Predictive Analytics • Enterprise Transformation
-    </p>
+  <footer>
+    <h2>Dr. Manoj Bhuskade</h2>
+    <p>AI Integration • Data Engineering • Geospatial Systems</p>
   </footer>
 
   <script>
-    const reveals = document.querySelectorAll('.reveal');
-
-    function revealOnScroll() {
-      const trigger = window.innerHeight * 0.85;
-
-      reveals.forEach((el) => {
-        const top = el.getBoundingClientRect().top;
-
-        if (top < trigger) {
-          el.classList.add('active');
+    // =========================================
+    // 1. ADVANCED 3D TILT WITH GLARE PHYSICS
+    // =========================================
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    
+    tiltCards.forEach(card => {
+      const glare = card.querySelector('.glare');
+      
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Calculate tilt
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8; // Max 8 deg
+        const rotateY = ((x - centerX) / centerX) * 8;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        
+        // Calculate glare position
+        if(glare) {
+          const glareX = (x / rect.width) * 100;
+          const glareY = (y / rect.height) * 100;
+          glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.15), transparent 50%)`;
         }
       });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+        if(glare) glare.style.background = `radial-gradient(circle at 50% 50%, rgba(255,255,255,0), transparent 50%)`;
+      });
+    });
+
+    // =========================================
+    // 2. LIVING CANVAS CONSTELLATION
+    // =========================================
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles;
+
+    function initCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      particles = [];
+      const count = window.innerWidth < 768 ? 40 : 80;
+      for(let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6,
+          radius: Math.random() * 1.5 + 0.5
+        });
+      }
     }
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+    let mouseX = width/2, mouseY = height/2;
+    window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
+    function animateCanvas() {
+      ctx.clearRect(0, 0, width, height);
+      for(let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        
+        // Gravitational pull to mouse
+        let dx = mouseX - p.x, dy = mouseY - p.y;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 250) { p.x += dx * 0.003; p.y += dy * 0.003; } 
+        else { p.x += p.vx; p.y += p.vy; }
 
-      document.querySelector('.glow.one').style.transform = `translate(${x * 40}px, ${y * 40}px)`;
-      document.querySelector('.glow.two').style.transform = `translate(-${x * 40}px, -${y * 40}px)`;
-    });
+        if(p.x < 0 || p.x > width) p.vx *= -1;
+        if(p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.5)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
+
+        for(let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let d = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if(d < 150) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 - d/1000})`;
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+    window.addEventListener('resize', initCanvas);
+    initCanvas(); animateCanvas();
+
+    // =========================================
+    // 3. CINEMATIC SCROLL REVEALS
+    // =========================================
+    const revealTargets = document.querySelectorAll('.reveal');
+    const scrollHandler = () => {
+      const winHeight = window.innerHeight;
+      revealTargets.forEach(el => { 
+        if (el.getBoundingClientRect().top < winHeight * 0.85) el.classList.add('active'); 
+      });
+    };
+    window.addEventListener('scroll', scrollHandler);
+    scrollHandler(); 
   </script>
-
 </body>
 </html>
