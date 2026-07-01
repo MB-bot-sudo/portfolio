@@ -11,16 +11,17 @@
        FUTURISTIC VARIABLES
        ========================================= */
     :root {
-      --bg-deep: #050507;
-      --bg-surface: #0e0f15;
-      --neo-shadow-dark: rgba(0, 0, 0, 0.8);
-      --neo-shadow-light: rgba(255, 255, 255, 0.03);
+      --bg-deep: #030305;
+      --bg-surface: #0a0b10;
+      --neo-shadow-dark: rgba(0, 0, 0, 0.9);
+      --neo-shadow-light: rgba(255, 255, 255, 0.04);
       --primary: #00f0ff;
-      --primary-glow: rgba(0, 240, 255, 0.4);
+      --primary-glow: rgba(0, 240, 255, 0.5);
       --secondary: #b026ff;
-      --secondary-glow: rgba(176, 38, 255, 0.4);
+      --secondary-glow: rgba(176, 38, 255, 0.5);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      --border-light: rgba(255, 255, 255, 0.08);
       --font-display: 'Rajdhani', sans-serif;
       --font-body: 'Inter', sans-serif;
       --easing: cubic-bezier(0.16, 1, 0.3, 1);
@@ -41,51 +42,50 @@
     /* =========================================
        LIVING CANVAS & AMBIENCE
        ========================================= */
-    #networkCanvas { position: fixed; inset: 0; z-index: -3; opacity: 0.6; pointer-events: none; }
+    #networkCanvas { position: fixed; inset: 0; z-index: -3; opacity: 0.5; pointer-events: none; }
     
     .bg-mesh {
       position: fixed; width: 60vw; height: 60vw; border-radius: 50%;
-      filter: blur(140px); z-index: -2; opacity: 0.15; pointer-events: none;
+      filter: blur(140px); z-index: -2; opacity: 0.12; pointer-events: none;
       animation: meshPulse 20s infinite alternate var(--easing);
     }
     .mesh-cyan { background: radial-gradient(circle, var(--primary), transparent 60%); top: -20%; left: -10%; }
     .mesh-purple { background: radial-gradient(circle, var(--secondary), transparent 60%); bottom: -20%; right: -10%; animation-delay: -5s; }
 
-    @keyframes meshPulse { 100% { transform: scale(1.3) translate(5%, 5%); opacity: 0.25; } }
-
-    /* =========================================
-       DARK NEOMORPHISM UTILITIES
-       ========================================= */
-    .neo-surface {
-      background: var(--bg-surface);
-      box-shadow: 8px 8px 20px var(--neo-shadow-dark), -8px -8px 20px var(--neo-shadow-light);
-      border-radius: 20px;
-    }
-    .neo-inset {
-      background: var(--bg-deep);
-      box-shadow: inset 5px 5px 15px var(--neo-shadow-dark), inset -5px -5px 15px var(--neo-shadow-light);
-      border-radius: 20px;
-    }
+    @keyframes meshPulse { 100% { transform: scale(1.2) translate(5%, 5%); opacity: 0.2; } }
 
     /* =========================================
        NAVIGATION
        ========================================= */
     nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
-      padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
-      background: rgba(5, 5, 7, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.02);
+      padding: 18px 5%; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
+      border-bottom: 1px solid rgba(255,255,255,0.03);
     }
-    .brand { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;}
+    
+    .brand-container { display: flex; flex-direction: column; }
+    .brand { 
+      font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; 
+      letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--text-main); 
+    }
     .brand span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+    .brand-title { 
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; 
+      margin-top: 6px; font-weight: 600; 
+      background: linear-gradient(90deg, var(--primary), var(--secondary)); 
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
     
     .nav-status {
       display: flex; align-items: center; gap: 10px; font-family: var(--font-display);
       font-size: 1rem; font-weight: 600; text-transform: uppercase; color: var(--primary);
-      padding: 8px 20px; border-radius: 30px; border: 1px solid var(--primary-glow);
-      background: rgba(0, 240, 255, 0.05); box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+      padding: 8px 22px; border-radius: 30px; border: 1px solid rgba(0, 240, 255, 0.3);
+      background: rgba(0, 240, 255, 0.03); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+      backdrop-filter: blur(5px);
     }
-    .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); animation: blink 1.5s infinite; }
-    @keyframes blink { 50% { opacity: 0.3; } }
+    .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); animation: blink 2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--primary); } 50% { opacity: 0.3; box-shadow: 0 0 0 transparent; } }
 
     /* =========================================
        HERO SECTION
@@ -95,23 +95,23 @@
       text-align: center; padding: 0 5%; position: relative; z-index: 10;
     }
     .hero-tag {
-      font-family: var(--font-display); font-size: 1.1rem; color: var(--secondary); letter-spacing: 4px; text-transform: uppercase;
-      margin-bottom: 25px; padding: 8px 24px; border-radius: 30px; background: rgba(176, 38, 255, 0.05);
-      border: 1px solid var(--secondary-glow); box-shadow: 0 0 20px rgba(176, 38, 255, 0.1);
+      font-family: var(--font-display); font-size: 1.1rem; color: var(--secondary); letter-spacing: 5px; text-transform: uppercase;
+      margin-bottom: 25px; padding: 8px 28px; border-radius: 30px; background: rgba(176, 38, 255, 0.03);
+      border: 1px solid rgba(176, 38, 255, 0.3); box-shadow: 0 0 20px rgba(176, 38, 255, 0.15);
     }
     .hero h1 {
-      font-family: var(--font-display); font-size: clamp(4rem, 8vw, 6.5rem); font-weight: 700; line-height: 1.05;
-      margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;
+      font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 700; line-height: 1.05;
+      margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;
       background: linear-gradient(180deg, #ffffff 0%, #64748b 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
     }
-    .hero p { max-width: 750px; font-size: 1.2rem; color: var(--text-muted); font-weight: 300; }
+    .hero p { max-width: 750px; font-size: 1.25rem; color: var(--text-muted); font-weight: 300; letter-spacing: 0.5px; }
 
     /* Scroll HUD */
     .scroll-hud {
       position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 15px;
     }
-    .scroll-hud span { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; }
+    .scroll-hud span { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; }
     .scroll-line { width: 1px; height: 60px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
     .scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 50%; background: var(--primary); animation: drop 2s infinite var(--easing); box-shadow: 0 0 10px var(--primary); }
     @keyframes drop { 100% { top: 150%; } }
@@ -121,26 +121,25 @@
        ========================================= */
     section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 5; }
     .section-header { text-align: center; margin-bottom: 80px; }
-    .section-header h2 { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
-    .section-header p { color: var(--primary); font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; }
+    .section-header h2 { font-family: var(--font-display); font-size: 3.2rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 5px 20px rgba(0,0,0,0.8); line-height: 1.1; }
+    .section-header p { color: var(--primary); font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; margin-top: 15px; }
 
     /* =========================================
        ORBITING BORDER CARDS (Core Competencies)
        ========================================= */
-    .core-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+    .core-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
     
     .core-card-wrapper {
-      position: relative; border-radius: 20px; overflow: hidden; padding: 2px;
-      /* The spinning gradient background */
-      background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05));
+      position: relative; border-radius: 24px; overflow: hidden; padding: 2px;
+      background: rgba(255,255,255,0.03);
       transition: transform 0.4s var(--easing), box-shadow 0.4s;
     }
     
     /* Spinning Magic */
     .core-card-wrapper::before {
-      content: ''; position: absolute; top: 50%; left: 50%; width: 200%; height: 200%;
+      content: ''; position: absolute; top: 50%; left: 50%; width: 250%; height: 250%;
       background: conic-gradient(transparent, transparent, transparent, var(--primary));
-      transform: translate(-50%, -50%) rotate(0deg); animation: spinBorder 4s linear infinite; z-index: 1; opacity: 0; transition: 0.4s;
+      transform: translate(-50%, -50%) rotate(0deg); animation: spinBorder 4s linear infinite; z-index: 1; opacity: 0.3; transition: 0.4s;
     }
     .core-card-wrapper:hover::before { opacity: 1; }
     .core-card-wrapper:nth-child(even)::before { background: conic-gradient(transparent, transparent, transparent, var(--secondary)); animation-duration: 5s; }
@@ -149,30 +148,32 @@
 
     .core-card {
       position: relative; z-index: 2; background: var(--bg-surface);
-      border-radius: 18px; padding: 40px 30px; height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+      border-radius: 22px; padding: 45px 35px; height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
     }
     
     .core-icon {
-      width: 70px; height: 70px; border-radius: 50%; background: var(--bg-deep);
-      box-shadow: inset 5px 5px 10px var(--neo-shadow-dark), inset -5px -5px 10px var(--neo-shadow-light);
+      width: 75px; height: 75px; border-radius: 50%; background: var(--bg-deep);
+      box-shadow: inset 5px 5px 15px var(--neo-shadow-dark), inset -5px -5px 15px var(--neo-shadow-light);
       display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--primary);
       margin-bottom: 25px; transition: 0.4s;
     }
-    .core-card-wrapper:hover .core-icon { color: #fff; box-shadow: 0 0 20px var(--primary-glow); background: var(--primary); }
-    .core-card-wrapper:nth-child(even):hover .core-icon { box-shadow: 0 0 20px var(--secondary-glow); background: var(--secondary); }
+    .core-card-wrapper:hover .core-icon { color: #fff; box-shadow: 0 0 25px var(--primary-glow); background: var(--primary); transform: scale(1.1); }
+    .core-card-wrapper:nth-child(even):hover .core-icon { box-shadow: 0 0 25px var(--secondary-glow); background: var(--secondary); }
 
-    .core-card h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
-    .core-card p { font-size: 0.95rem; color: var(--text-muted); }
+    .core-card h3 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;}
+    .core-card p { font-size: 1rem; color: var(--text-muted); font-weight: 300; }
 
     /* =========================================
        CYBER-CIRCUIT ARCHITECTURE SIMULATION
        ========================================= */
+    .simulation-section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+    
     .sim-wrapper {
       position: relative; width: 100%; aspect-ratio: 21/9;
       border-radius: 30px; overflow: hidden; display: flex; align-items: center; justify-content: center;
-      background: radial-gradient(circle at center, rgba(14, 15, 21, 0.8) 0%, var(--bg-deep) 100%);
-      border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      background: radial-gradient(circle at center, rgba(14, 15, 21, 0.9) 0%, var(--bg-deep) 100%);
+      border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 40px 80px rgba(0,0,0,0.9);
     }
     
     /* Motherboard Grid */
@@ -187,15 +188,15 @@
     .sim-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
     
     /* Circuit Board 45-degree Paths */
-    .circuit-base { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 2; }
+    .circuit-base { fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 2; }
     .circuit-glow { 
       fill: none; stroke-width: 3; stroke-linecap: square;
-      stroke-dasharray: 40 200; animation: circuitFlow 3s linear infinite;
+      stroke-dasharray: 50 250; animation: circuitFlow 3.5s linear infinite;
     }
-    .circuit-cyan { stroke: var(--primary); filter: drop-shadow(0 0 8px var(--primary)); }
-    .circuit-purple { stroke: var(--secondary); filter: drop-shadow(0 0 8px var(--secondary)); animation-delay: 1.5s; }
+    .circuit-cyan { stroke: var(--primary); filter: drop-shadow(0 0 10px var(--primary)); }
+    .circuit-purple { stroke: var(--secondary); filter: drop-shadow(0 0 10px var(--secondary)); animation-delay: 1.75s; }
 
-    @keyframes circuitFlow { from { stroke-dashoffset: 240; } to { stroke-dashoffset: 0; } }
+    @keyframes circuitFlow { from { stroke-dashoffset: 300; } to { stroke-dashoffset: 0; } }
 
     /* Nodes */
     .sim-node {
@@ -203,18 +204,18 @@
       display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
     .sim-hex {
-      width: 70px; height: 70px; background: var(--bg-surface);
-      border: 2px solid rgba(255,255,255,0.1); border-radius: 16px;
+      width: 75px; height: 75px; background: var(--bg-surface);
+      border: 2px solid rgba(255,255,255,0.1); border-radius: 20px;
       display: flex; justify-content: center; align-items: center;
       font-size: 1.8rem; color: var(--text-main); position: relative;
-      box-shadow: 8px 8px 15px rgba(0,0,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.05);
-      transition: 0.3s;
+      box-shadow: 10px 10px 20px rgba(0,0,0,0.8), inset 2px 2px 5px rgba(255,255,255,0.05);
+      transition: 0.4s var(--easing);
     }
-    .sim-node:hover .sim-hex { transform: scale(1.1); border-color: var(--primary); box-shadow: 0 0 30px var(--primary-glow); color: var(--primary); }
-    .sim-node.node-ai:hover .sim-hex { border-color: var(--secondary); box-shadow: 0 0 30px var(--secondary-glow); color: var(--secondary); }
+    .sim-node:hover .sim-hex { transform: scale(1.15); border-color: var(--primary); box-shadow: 0 0 40px var(--primary-glow); color: var(--primary); }
+    .sim-node.node-ai:hover .sim-hex { border-color: var(--secondary); box-shadow: 0 0 40px var(--secondary-glow); color: var(--secondary); }
 
-    .sim-node span { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 5px 10px #000; }
-    .sim-node p { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+    .sim-node span { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 0 5px 10px #000; }
+    .sim-node p { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
 
     /* =========================================
        3D TILT PROJECTS WITH GLARE (Physics JS)
@@ -222,9 +223,9 @@
     .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; perspective: 1500px; }
     
     .project-card {
-      position: relative; background: var(--bg-surface); border-radius: 24px; padding: 40px;
-      transform-style: preserve-3d; border: 1px solid rgba(255,255,255,0.03);
-      box-shadow: 15px 15px 30px rgba(0,0,0,0.8), inset 1px 1px 2px rgba(255,255,255,0.05);
+      position: relative; background: var(--bg-surface); border-radius: 24px; padding: 45px;
+      transform-style: preserve-3d; border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 20px 20px 40px rgba(0,0,0,0.9), inset 1px 1px 2px rgba(255,255,255,0.05);
       will-change: transform; transition: transform 0.1s;
     }
     
@@ -236,60 +237,89 @@
     }
     .project-card:hover .glare { opacity: 1; }
 
-    .project-content { transform: translateZ(40px); /* 3D pop out */ }
+    .project-content { transform: translateZ(50px); /* 3D pop out */ }
     
     .project-icon {
-      width: 60px; height: 60px; border-radius: 14px; background: var(--bg-deep);
+      width: 65px; height: 65px; border-radius: 16px; background: var(--bg-deep);
       display: flex; justify-content: center; align-items: center; font-size: 1.8rem;
-      color: var(--primary); margin-bottom: 25px; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.8);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+      color: var(--primary); margin-bottom: 25px; box-shadow: inset 4px 4px 10px rgba(0,0,0,0.9);
+      border: 1px solid rgba(0, 240, 255, 0.2); transition: 0.3s;
     }
     .project-card:nth-child(even) .project-icon { color: var(--secondary); border-color: rgba(176, 38, 255, 0.2); }
 
-    .project-card h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
-    .project-card p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+    .project-card h3 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; text-shadow: 0 4px 10px rgba(0,0,0,0.5);}
+    .project-card p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
     
-    .tech-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
-    .badge { padding: 6px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); }
+    .tech-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .badge { padding: 6px 18px; border-radius: 30px; font-size: 0.85rem; font-family: var(--font-display); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-main); }
 
     /* =========================================
        CINEMATIC GALLERY
        ========================================= */
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
     
     .gallery-item {
       aspect-ratio: 16/10; border-radius: 20px; overflow: hidden; position: relative;
-      box-shadow: 10px 10px 25px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 15px 15px 35px rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.05);
       cursor: crosshair;
     }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s var(--easing); opacity: 0.6; filter: grayscale(50%); }
-    .gallery-item:hover img { transform: scale(1.1); opacity: 1; filter: grayscale(0%); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s var(--easing); opacity: 0.5; filter: grayscale(80%); }
+    .gallery-item:hover img { transform: scale(1.05); opacity: 1; filter: grayscale(0%); }
     
     .gallery-caption {
       position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent 70%);
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 35px;
       opacity: 0; transform: translateY(20px); transition: 0.5s var(--easing); pointer-events: none;
     }
     .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
-    .gallery-caption h4 { font-family: var(--font-display); font-size: 1.5rem; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
-    .gallery-caption p { font-size: 0.9rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+    .gallery-caption h4 { font-family: var(--font-display); font-size: 1.8rem; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+    .gallery-caption p { font-size: 0.95rem; color: var(--primary); font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: 3px; }
 
     /* =========================================
        SCROLL REVEALS
        ========================================= */
-    .reveal { opacity: 0; transform: translateY(50px); transition: 1s var(--easing); }
+    .reveal { opacity: 0; transform: translateY(60px); transition: 1s var(--easing); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
     /* FOOTER */
-    footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.02); background: #020203; }
-    footer h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.03); background: #020203; position: relative; z-index: 10;}
+    footer h2 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    footer p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 1px; }
 
-    /* RESPONSIVE */
+    /* =========================================
+       RESPONSIVE DESIGN (Mobile Fixes Included)
+       ========================================= */
     @media(max-width: 900px) {
       .hero h1 { font-size: 3.5rem; }
-      .sim-wrapper { display: none; /* SVG scaling issues on mobile mitigated by hiding complex desktop arch */ }
-      .project-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
+      .brand-title { font-size: 0.65rem; }
+      .nav-status { display: none; } /* Hide status on mobile to save space */
+      .project-grid, .gallery-grid { grid-template-columns: 1fr; }
+      
+      /* Mobile Architecture Simulation Fix */
+      .sim-wrapper { 
+        aspect-ratio: auto; 
+        display: flex; 
+        flex-direction: column; 
+        padding: 60px 20px; 
+        gap: 60px;
+      }
+      .sim-svg { display: none; } /* Hide complex horizontal SVG */
+      
+      /* Create Vertical Mobile Glow Line */
+      .sim-wrapper::after {
+        content: ''; position: absolute; top: 60px; bottom: 60px; left: 50%;
+        width: 3px; background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        transform: translateX(-50%); z-index: 1;
+        box-shadow: 0 0 15px var(--primary);
+      }
+      
+      /* Reset absolute positioning for mobile flow */
+      .sim-node {
+        position: relative; left: auto !important; top: auto !important;
+        transform: none !important; z-index: 2;
+        background: var(--bg-surface); padding: 15px; border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+      }
     }
   </style>
 </head>
@@ -300,14 +330,17 @@
   <div class="bg-mesh mesh-purple"></div>
 
   <nav>
-    <div class="brand">Dr.Manoj <span>Bhuskade</span></div>
+    <div class="brand-container">
+      <div class="brand">Dr.Manoj Bhuskade <span>Bhuskade</span></div>
+      <div class="brand-title">System Architect, Data Scientist & AI Specialist</div>
+    </div>
     <div class="nav-status">
-      <div class="status-dot"></div> Security: Online
+      <div class="status-dot"></div> Infographic Portfolio
     </div>
   </nav>
 
   <section class="hero">
-    <div class="hero-tag reveal active">AI & System Architecture</div>
+    <div class="hero-tag reveal active">AI Integration & System Architecture</div>
     <h1 class="reveal active" style="transition-delay: 0.1s;">Futuristic<br>Intelligence</h1>
     <p class="reveal active" style="transition-delay: 0.2s;">
       Engineering the precise convergence of deep learning computer vision, robust geospatial data analytics, and flawless automated enterprise pipelines.
@@ -333,6 +366,7 @@
           <p>Designing scalable blueprints and data routing pipelines for enterprise apps.</p>
         </div>
       </div>
+      
       <div class="core-card-wrapper reveal" style="transition-delay: 0.1s;">
         <div class="core-card">
           <div class="core-icon"><i class="fa-solid fa-network-wired"></i></div>
@@ -340,6 +374,7 @@
           <p>Extracting and transforming vast datasets to drive infra decision-making.</p>
         </div>
       </div>
+      
       <div class="core-card-wrapper reveal" style="transition-delay: 0.2s;">
         <div class="core-card">
           <div class="core-icon"><i class="fa-solid fa-gears"></i></div>
@@ -347,6 +382,7 @@
           <p>Dismantling manual bottlenecks with high-speed programmatic workflows.</p>
         </div>
       </div>
+      
       <div class="core-card-wrapper reveal" style="transition-delay: 0.3s;">
         <div class="core-card">
           <div class="core-icon"><i class="fa-solid fa-robot"></i></div>
@@ -354,6 +390,7 @@
           <p>Training custom YOLOv8 deep learning models for accurate object detection.</p>
         </div>
       </div>
+      
       <div class="core-card-wrapper reveal" style="transition-delay: 0.4s;">
         <div class="core-card">
           <div class="core-icon"><i class="fa-solid fa-chart-pie"></i></div>
@@ -361,18 +398,12 @@
           <p>Orchestrating Power BI semantic models and interactive executive dashboards.</p>
         </div>
       </div>
+      
       <div class="core-card-wrapper reveal" style="transition-delay: 0.5s;">
         <div class="core-card">
           <div class="core-icon"><i class="fa-solid fa-earth-americas"></i></div>
           <h3>GIS Spatial Analytics</h3>
           <p>Fusing geographic information systems with real-time operational field data.</p>
-        </div>
-      </div>
-      <div class="core-card-wrapper reveal" style="transition-delay: 0.6s;">
-        <div class="core-card">
-          <div class="core-icon"><i class="fa-solid fa-laptop-code"></i></div>
-          <h3>App Design & Dev</h3>
-          <p>Building polished full-stack UI/UX interfaces bridging humans and AI logic.</p>
         </div>
       </div>
     </div>
@@ -423,7 +454,7 @@
       </div>
 
       <div class="sim-node" style="left: 85%; top: 50%;">
-        <div class="sim-hex"><i class="fa-solid fa-chart-column"></i></div>
+        <div class="sim-hex" style="border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow);"><i class="fa-solid fa-chart-column" style="color:var(--primary);"></i></div>
         <span style="color:var(--primary);">BI Analytics</span>
         <p>Dashboard Output</p>
       </div>
@@ -432,7 +463,7 @@
 
   <section id="projects">
     <div class="section-header reveal">
-      <h2>Deployed Systems</h2>
+      <h2>Innovations & Projects</h2>
       <p>Operational Infrastructure Intelligence</p>
     </div>
 
@@ -534,7 +565,7 @@
 
   <footer>
     <h2>Dr. Manoj Bhuskade</h2>
-    <p>AI Integration • Data Engineering • Geospatial Systems</p>
+    <p>Data Scientist • Data Engineering • Geospatial Systems</p>
   </footer>
 
   <script>
@@ -554,21 +585,21 @@
         // Calculate tilt
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -8; // Max 8 deg
-        const rotateY = ((x - centerX) / centerX) * 8;
+        const rotateX = ((y - centerY) / centerY) * -10; 
+        const rotateY = ((x - centerX) / centerX) * 10;
         
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         
         // Calculate glare position
         if(glare) {
           const glareX = (x / rect.width) * 100;
           const glareY = (y / rect.height) * 100;
-          glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.15), transparent 50%)`;
+          glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.1), transparent 50%)`;
         }
       });
       
       card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+        card.style.transform = `perspective(1200px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
         if(glare) glare.style.background = `radial-gradient(circle at 50% 50%, rgba(255,255,255,0), transparent 50%)`;
       });
     });
@@ -611,7 +642,7 @@
         if(p.x < 0 || p.x > width) p.vx *= -1;
         if(p.y < 0 || p.y > height) p.vy *= -1;
 
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.5)';
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.6)';
         ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
 
         for(let j = i + 1; j < particles.length; j++) {
